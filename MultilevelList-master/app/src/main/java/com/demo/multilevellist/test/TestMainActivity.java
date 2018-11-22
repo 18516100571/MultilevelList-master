@@ -75,6 +75,8 @@ public class TestMainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                listView.setEnabled(false);
+                listView.setClickable(false);
                 getSubList(position, showList.get(position));
             }
         });
@@ -91,15 +93,17 @@ public class TestMainActivity extends AppCompatActivity {
 
                 } else {
                     try {
-                        listView.setEnabled(false);
-                        listView.setClickable(false);
+
+
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                listView.setEnabled(true);
-                listView.setClickable(true);
+                /**
+                 * 模拟取子节点数据
+                 */
+
                 subList.clear();
                 for (int h = 0; h < 3; h++) {
                     ID++;
@@ -110,6 +114,8 @@ public class TestMainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        listView.setEnabled(true);
+                        listView.setClickable(true);
                         if (1 == 2) {//无数据
                             return;
                         } else if (subList.size() > 0 && !treePoint.isExpand()) {//点击项有子数据但未展开，展开操作。
